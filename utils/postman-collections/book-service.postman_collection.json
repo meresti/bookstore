@@ -1,0 +1,84 @@
+{
+	"variables": [],
+	"info": {
+		"name": "book-service",
+		"_postman_id": "4355f5af-682f-b4c3-7651-7bbf42f91d1d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/book-service/books",
+			"request": {
+				"url": "http://localhost:8080/book-service/books",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/book-service/books/2",
+			"request": {
+				"url": "http://localhost:8080/book-service/books/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/book-service/books",
+			"request": {
+				"url": "http://localhost:8080/book-service/books",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Atlas Shrugged\",\n    \"authors\": [\n        \"Ayn Rand\"\n    ],\n    \"isbn\": \"9780452286368\",\n    \"publisher\": \"NAL\",\n    \"publicationDate\": \"2004-12-28\",\n    \"language\": \"English\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/book-service/books/3",
+			"request": {
+				"url": "http://localhost:8080/book-service/books/3",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/book-service/books/2",
+			"request": {
+				"url": "http://localhost:8080/book-service/books/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Atlas Shrugged\",\n    \"authors\": [\n        \"Ayn Rand\"\n    ],\n    \"isbn\": \"9780452286368\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
