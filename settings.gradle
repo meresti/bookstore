@@ -1,2 +1,4 @@
 rootProject.name = 'bookstore'
 include 'book-service'
+include 'config-server'
+
