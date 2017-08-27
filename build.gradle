@@ -1,0 +1,17 @@
+group 'com.meresti.bookstore'
+version '1.0-SNAPSHOT'
+
+configure(allprojects) { project ->
+    apply plugin: "java"
+
+    sourceCompatibility = 1.8
+    compileJava.options.encoding = 'UTF-8'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+    }
+}
