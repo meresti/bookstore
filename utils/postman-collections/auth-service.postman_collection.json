@@ -1,0 +1,73 @@
+{
+	"variables": [],
+	"info": {
+		"name": "auth-service",
+		"_postman_id": "c2e7d649-fbd6-f1ab-5a6e-2d6464b22316",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9191/uaa/oauth/token",
+			"request": {
+				"url": "http://localhost:9191/uaa/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "password",
+							"value": "alma",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "zsolt",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "acmesecret",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "acme",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

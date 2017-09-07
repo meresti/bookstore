@@ -1,0 +1,28 @@
+{
+	"variables": [],
+	"info": {
+		"name": "bookstore-client",
+		"_postman_id": "d72aed6e-57c4-9db4-51b6-86a5bf2bbcb7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:7777/books/titles",
+			"request": {
+				"url": "http://localhost:7777/books/titles",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer 91898a49-191b-4bd4-bee4-8f97200728dc",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
