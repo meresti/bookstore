@@ -27,7 +27,7 @@ allprojects {
     compileJava.options.encoding = 'UTF-8'
 
     ext {
-        springCloudVersion = 'Dalston.SR3'
+        springCloudVersion = 'Dalston.SR1'
     }
 
     dependencies {
