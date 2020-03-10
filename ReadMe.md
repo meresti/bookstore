@@ -1,0 +1,7 @@
+- start the config server
+- start the eureka service
+- start the auth service
+- start the hystrix dashboard
+- start the zipkin service
+- start the bookstore service
+- start the bookstore client service

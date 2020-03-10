@@ -8,9 +8,9 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:9191/uaa/oauth/token",
+			"name": "http://localhost:7878/uaa/oauth/token",
 			"request": {
-				"url": "http://localhost:9191/uaa/oauth/token",
+				"url": "http://localhost:7878/uaa/oauth/token",
 				"method": "POST",
 				"header": [
 					{

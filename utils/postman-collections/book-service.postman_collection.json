@@ -8,9 +8,9 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/book-service/books",
+			"name": "http://localhost:8080/books",
 			"request": {
-				"url": "http://localhost:8080/book-service/books",
+				"url": "http://localhost:8080/books",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -19,9 +19,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/book-service/books/2",
+			"name": "http://localhost:8080/books/2",
 			"request": {
-				"url": "http://localhost:8080/book-service/books/2",
+				"url": "http://localhost:8080/books/2",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -30,9 +30,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/book-service/books",
+			"name": "http://localhost:8080/books",
 			"request": {
-				"url": "http://localhost:8080/book-service/books",
+				"url": "http://localhost:8080/books",
 				"method": "POST",
 				"header": [
 					{
@@ -50,9 +50,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/book-service/books/3",
+			"name": "http://localhost:8080/books/3",
 			"request": {
-				"url": "http://localhost:8080/book-service/books/3",
+				"url": "http://localhost:8080/books/3",
 				"method": "DELETE",
 				"header": [],
 				"body": {},
@@ -61,9 +61,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/book-service/books/2",
+			"name": "http://localhost:8080/books/2",
 			"request": {
-				"url": "http://localhost:8080/book-service/books/2",
+				"url": "http://localhost:8080/books/2",
 				"method": "PUT",
 				"header": [
 					{
