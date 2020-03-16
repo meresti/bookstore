@@ -1,10 +1,10 @@
-package com.meresti.bookstore.configserver;
+package com.meresti.bookstore.eurekaservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConfigServerApplicationTests {
+class EurekaServiceApplicationTests {
 
     @Test
     void contextLoads() {

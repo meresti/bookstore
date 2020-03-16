@@ -70,7 +70,8 @@ public class BookServiceApplication {
                     .publicationDate(LocalDate.of(2008, Month.MAY, 8))
                     .build();
 
-            bookRepository.save(Arrays.asList(designPatterns, cleanCode, theCleanCoder, effectiveJava));
+            bookRepository.saveAll(Arrays.asList(designPatterns, cleanCode, theCleanCoder, effectiveJava));
         }
     }
+
 }

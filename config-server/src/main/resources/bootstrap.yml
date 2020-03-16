@@ -1,0 +1,9 @@
+#encrypt.key=secret
+
+# All this must be in the bootstrap.yml instead of application.yml
+encrypt:
+  key-store:
+    location: classpath:/config-server.jks
+    password: k0rt3p4link4
+    alias: config-server-key
+    secret: 4lm4st3szt4

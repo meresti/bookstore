@@ -7,13 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Stream;
 
 @EnableDiscoveryClient
-@EnableResourceServer
+//@EnableResourceServer
 @SpringBootApplication
 public class AuthServiceApplication {
 
@@ -29,13 +28,19 @@ public class AuthServiceApplication {
 
         @Override
         public void run(String... args) throws Exception {
-            Stream.of("zsolt,alma", "john,korte", "sarah,szilva")
-                    .map(x -> x.split(","))
-                    .map(tuple -> User.builder()
-                            .username(tuple[0])
-                            .password(tuple[1])
-                            .active(true).build())
+            Stream.of("zsolt:alma", "john:korte", "sarah:szilva")
+                    .map(x -> x.split(":"))
+                    .map(this::createUser)
                     .forEach(userRepository::save);
         }
+
+        private User createUser(String[] tuple) {
+            return User.builder()
+                    .username(tuple[0])
+                    .password("{noop}" + tuple[1])
+                    .active(true)
+                    .build();
+        }
     }
+
 }

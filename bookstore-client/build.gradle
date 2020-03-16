@@ -1,18 +1,19 @@
-
-version = '0.0.1-SNAPSHOT'
-
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation('org.springframework.boot:spring-boot-starter-actuator')
-	implementation('org.springframework.cloud:spring-cloud-starter-config')
-	implementation('org.springframework.cloud:spring-cloud-starter-eureka')
-	implementation('org.springframework.cloud:spring-cloud-starter-feign')
-	implementation('org.springframework.cloud:spring-cloud-starter-hystrix')
-	implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
-	implementation('org.springframework.cloud:spring-cloud-starter-zipkin')
-	implementation('org.springframework.cloud:spring-cloud-starter-zuul')
-	implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-zuul'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.retry:spring-retry'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
 }

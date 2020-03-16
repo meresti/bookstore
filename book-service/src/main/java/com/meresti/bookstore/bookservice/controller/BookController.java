@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("books")
@@ -29,16 +30,14 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getOne(@PathVariable Long id) {
-        final Book book = bookRepository.findOne(id);
-        if (book != null) {
-            return ResponseEntity.ok().body(book);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        final Optional<Book> optionalBook = bookRepository.findById(id);
+        return optionalBook
+                .map(book -> ResponseEntity.ok().body(book))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> saveOne(@Valid @RequestBody Book book) {
+    public ResponseEntity<?> insertOne(@Valid @RequestBody Book book) {
         final Book savedBook = bookRepository.save(book);
 
         final URI location = ServletUriComponentsBuilder
@@ -50,8 +49,8 @@ public class BookController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateOne(@PathVariable Long id, @Valid @RequestBody Book book) {
-        final Book bookToUpdate = bookRepository.findOne(id);
-        if (bookToUpdate != null) {
+        final Optional<Book> bookToUpdate = bookRepository.findById(id);
+        if (bookToUpdate.isPresent()) {
             book.setId(id);
             final Book updatedBook = bookRepository.save(book);
             return ResponseEntity.ok().body(updatedBook);
@@ -62,7 +61,7 @@ public class BookController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOne(@PathVariable Long id) {
-        bookRepository.delete(id);
+        bookRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 

@@ -1,0 +1,115 @@
+version: "3"
+
+services:
+
+  config-server:
+    image: bookstore/config-server:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: config-server
+        PORT: 9999
+        MAIN_CLASS: com.meresti.bookstore.configserver.ConfigServerApplication
+    ports:
+      - "9999:9999"
+    healthcheck:
+      test: curl -f http://localhost:9999/actuator/health || exit 1
+      interval: 3s
+      timeout: 1s
+      retries: 5
+
+  eureka-service:
+    image: bookstore/eureka-service:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: eureka-service
+        PORT: 8761
+        MAIN_CLASS: com.meresti.bookstore.eurekaservice.EurekaServiceApplication
+    depends_on:
+      - config-server
+    environment:
+      CONFIG_SERVER_URL: http://config-server:9999
+    ports:
+      - "8761:8761"
+
+  hystrix-dashboard:
+    image: bookstore/hystrix-dashboard:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: hystrix-dashboard
+        PORT: 8010
+        MAIN_CLASS: com.meresti.bookstore.hystrixdashboard.HystrixDashboardApplication
+    depends_on:
+      - config-server
+    environment:
+      CONFIG_SERVER_URL: http://config-server:9999
+    ports:
+      - "8010:8010"
+
+  zipkin-server:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+
+  auth-service:
+    image: bookstore/auth-service:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: auth-service
+        PORT: 7878
+        MAIN_CLASS: com.meresti.bookstore.authservice.AuthServiceApplication
+    depends_on:
+      - config-server
+      - eureka-service
+    environment:
+      CONFIG_SERVER_URL: http://config-server:9999
+      EUREKA_SERVICE_URL: http://eureka-service:8761/eureka/
+    ports:
+      - "7878:7878"
+
+  book-service:
+    image: bookstore/book-service:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: book-service
+        PORT: 8000
+        MAIN_CLASS: com.meresti.bookstore.bookservice.BookServiceApplication
+    depends_on:
+      - config-server
+      - eureka-service
+      - zipkin-server
+    environment:
+      CONFIG_SERVER_URL: http://config-server:9999
+      EUREKA_SERVICE_URL: http://eureka-service:8761/eureka/
+      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+    ports:
+      - "8000:8000"
+
+  bookstore-client:
+    image: bookstore/bookstore-client:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: bookstore-client
+        PORT: 8080
+        MAIN_CLASS: com.meresti.bookstoreclient.BookstoreClientApplication
+    depends_on:
+      - config-server
+      - eureka-service
+      - zipkin-server
+    environment:
+      CONFIG_SERVER_URL: http://config-server:9999
+      EUREKA_SERVICE_URL: http://eureka-service:8761/eureka/
+      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+    ports:
+      - "8080:8080"

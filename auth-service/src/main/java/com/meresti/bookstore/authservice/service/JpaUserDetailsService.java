@@ -18,14 +18,18 @@ public class JpaUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
-                .map(user -> new User(user.getUsername(),
-                        user.getPassword(),
-                        user.isActive(),
-                        user.isActive(),
-                        user.isActive(),
-                        user.isActive(),
-                        AuthorityUtils.createAuthorityList("ROLE_ADMIN", "ROLE_USER")))
+                .map(this::convertToSpringUser)
                 .orElseThrow(() -> new UsernameNotFoundException("No user with name " + username));
+    }
+
+    private UserDetails convertToSpringUser(final com.meresti.bookstore.authservice.model.User user) {
+        return new User(user.getUsername(),
+                user.getPassword(),
+                user.isActive(),
+                user.isActive(),
+                user.isActive(),
+                user.isActive(),
+                AuthorityUtils.createAuthorityList("ROLE_ADMIN", "ROLE_USER"));
     }
 
 }

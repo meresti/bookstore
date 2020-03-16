@@ -1,4 +1,4 @@
-package com.meresti.eurekaservice;
+package com.meresti.bookstore.eurekaservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

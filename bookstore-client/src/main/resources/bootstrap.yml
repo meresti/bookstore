@@ -1,0 +1,12 @@
+
+spring.application.name: bookstore-client
+
+spring.cloud.config:
+  uri: ${CONFIG_SERVER_URL:http://localhost:9999}
+  failFast: true
+
+spring.cloud.config.retry:
+  initial-interval: 1000
+  max-attempts: 10
+  max-interval: 60000
+  multiplier: 1.2
