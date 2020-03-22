@@ -2,6 +2,28 @@ version: "3"
 
 services:
 
+  consul-server-1: &consul-server
+    image: consul:latest
+    volumes:
+      - consul-server-1-data-volume:/consul/data
+    command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
+
+  consul-server-2:
+    <<: *consul-server
+    volumes:
+      - consul-server-2-data-volume:/consul/data
+
+  consul-server-bootstrap:
+    <<: *consul-server
+    volumes:
+      - consul-server-bootstrap-data-volume:/consul/data
+    command: "agent -server -bootstrap-expect 3 -ui -client 0.0.0.0"
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+      - "8600:8600/udp"
+
   config-server:
     image: bookstore/config-server:v0.1
     build:
@@ -113,3 +135,8 @@ services:
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
     ports:
       - "8080:8080"
+
+volumes:
+  consul-server-bootstrap-data-volume:
+  consul-server-1-data-volume:
+  consul-server-2-data-volume:
