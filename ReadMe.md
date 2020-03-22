@@ -1,3 +1,6 @@
+Based on the blog series:
+https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-microservices/
+
 # build
 `gardlew clean build -x test`
 `docker-compose build`
@@ -21,4 +24,4 @@
 
 # todo
 - fix security
-- revisit all components and check whether they are actively supported or need replacement. Like Hystrix (Dashboard), etc. 
+- revisit all components and check whether they are actively supported or need replacement. Like Hystrix (Dashboard), Ribbon, Zuul, etc. 
