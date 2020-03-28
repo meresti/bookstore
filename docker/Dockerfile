@@ -25,8 +25,12 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
 ARG PORT
 ENV PORT=${PORT:-8080}
-EXPOSE ${PORT}
+
+ARG DEBUG_PORT
+ENV DEBUG_PORT=${DEBUG_PORT:-5005}
+
+EXPOSE ${PORT} ${DEBUG_PORT}
 
 ARG MAIN_CLASS
 ENV MAIN_CLASS=${MAIN_CLASS}
-ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* ${MAIN_CLASS}"]
+ENTRYPOINT ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:${DEBUG_PORT} -cp app:app/lib/* ${MAIN_CLASS}"]

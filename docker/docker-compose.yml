@@ -59,8 +59,10 @@ services:
       CONSUL_HOST: consul
       CONSUL_PORT: 8500
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+      DEBUG_PORT: 2002
     ports:
       - "8010:8010"
+      - "2002:2002"
 
   #  auth-service:
   #    image: bookstore/auth-service:v0.1
@@ -96,8 +98,10 @@ services:
       CONSUL_HOST: consul
       CONSUL_PORT: 8500
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+      DEBUG_PORT: 4004
     ports:
       - "8020:8000"
+      - "4004:4004"
 
 #  bookstore-client:
 #    image: bookstore/bookstore-client:v0.1

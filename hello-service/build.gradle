@@ -11,6 +11,5 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.retry:spring-retry'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
-    runtimeOnly 'org.glassfish.jaxb:jaxb-runtime'
 }
 
