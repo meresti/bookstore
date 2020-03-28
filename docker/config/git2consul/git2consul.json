@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "repos" : [
+    {
+      "name" : "bookstore-config",
+      "url" : "https://github.com/meresti/bookstore-config.git",
+      "include_branch_name" : false,
+      "ignore_file_extension" : false,
+      "branches" : ["spring_cloud_Hoxton_SR3"],
+      "hooks": [{
+        "type" : "polling",
+        "interval" : "1"
+      }]
+    }
+  ]
+}

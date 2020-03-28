@@ -10,6 +10,7 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 ## manually
 - start the config server
   - http://localhost:9999/book-service/default
+- HashiCorp Consul: http://localhost:8500/
 - start the eureka service
   - http://localhost:8761
 - start the hystrix dashboard
@@ -25,3 +26,8 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 # todo
 - fix security
 - revisit all components and check whether they are actively supported or need replacement. Like Hystrix (Dashboard), Ribbon, Zuul, etc. 
+
+# links
+- https://dzone.com/articles/the-future-of-spring-cloud-microservices-after-net
+- https://dzone.com/articles/microservices-with-spring-boot-spring-cloud-gatewa
+- http://progressivecoder.com/a-detailed-guide-to-spring-cloud-consul/

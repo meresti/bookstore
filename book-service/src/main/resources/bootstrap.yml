@@ -1,12 +1,30 @@
+spring:
+  application:
+    name: book-service
 
-spring.application.name: book-service
+  cloud:
+    consul:
+      host: ${CONSUL_HOST:localhost}
+      port: ${CONSUL_PORT:8500}
+      discovery:
+        enabled: true
+        fail-fast: true
+      config:
+        enabled: true
+        fail-fast: true
+        format: files
+        prefix: bookstore-config
+        watch:
+          enabled: false
+          delay: 10000
+          wait-time: 50
+      #      tls:
+#        key-store-path:
+      retry:
+        initial-interval: 1000
+        max-attempts: 10
+        max-interval: 60000
+        multiplier: 1.2
 
-spring.cloud.config:
-  uri: ${CONFIG_SERVER_URL:http://localhost:9999}
-  failFast: true
-
-spring.cloud.config.retry:
-  initial-interval: 1000
-  max-attempts: 10
-  max-interval: 60000
-  multiplier: 1.2
+logging.level.root: info
+logging.level.org.springframework.retry: debug

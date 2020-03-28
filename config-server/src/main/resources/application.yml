@@ -1,9 +1,21 @@
-spring.cloud.config.server.git:
-  uri: https://github.com/meresti/bookstore-config.git
-  basedir: ./config
+server:
+  port: ${APP_PORT:9999}
 
-server.port: ${APP_PORT:9999}
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/meresti/bookstore-config.git
+          default-label: spring_cloud_Hoxton_SR3
+          basedir: ./config
 
-spring.jackson.serialization.indent_output: true
+  jackson:
+    serialization:
+      indent_output: true
 
-management.endpoints.web.exposure.include: '*'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
