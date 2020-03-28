@@ -1,4 +1,4 @@
-package com.meresti.bookstore.bookservice;
+package com.meresti.bookstore.bookervice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
