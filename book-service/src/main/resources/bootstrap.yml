@@ -15,11 +15,7 @@ spring:
         format: files
         prefix: bookstore-config
         watch:
-          enabled: false
-          delay: 10000
-          wait-time: 50
-#      tls:
-#        key-store-path:
+          enabled: true
       retry:
         initial-interval: 1000
         max-attempts: 10
