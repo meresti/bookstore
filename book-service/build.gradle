@@ -5,7 +5,10 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.cloud:spring-cloud-starter-consul-config'
-    implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+    implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery') {
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-netflix-hystrix'
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+    }
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
     implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
