@@ -42,7 +42,6 @@ services:
     ports:
       - 9411:9411
 
-
   hello-service:
     image: bookstore/hello-service:v0.1
     build:

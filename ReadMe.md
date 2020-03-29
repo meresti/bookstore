@@ -7,21 +7,13 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 # deploy
 ## docker-compose
 `docker-compose up`
-## manually
-- start the config server
-  - http://localhost:9999/book-service/default
+### Services
+- Auth service
 - HashiCorp Consul: http://localhost:8500/
-- start the eureka service
-  - http://localhost:8761
-- start the hystrix dashboard
-  - http://localhost:8010/hystrix
-- start the official zipkin server (https://github.com/openzipkin/zipkin)
-  - http://localhost:9411/zipkin/
-- start the auth service
-- start the bookstore service
-  - http://localhost:8000/books
-- start the bookstore client service
-  - http://localhost:8080/books/titles
+- Zipkin server: http://localhost:9411/zipkin/
+- Bookstore service: http://localhost:8020/books
+- Bookstore client service: http://localhost:8080/books/titles
+- Hello service: http://localhost:8010/encrypted-message
 
 # todo
 - fix security
