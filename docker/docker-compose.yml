@@ -102,22 +102,23 @@ services:
       - "8020:8000"
       - "4004:4004"
 
-#  bookstore-client:
-#    image: bookstore/bookstore-client:v0.1
-#    build:
-#      context: ..
-#      dockerfile: docker/Dockerfile
-#      args:
-#        PROJECT: bookstore-client
-#        PORT: 8080
-#        MAIN_CLASS: com.meresti.bookstoreclient.BookstoreClientApplication
-#    depends_on:
-#      - config-server
-#      - eureka-service
-#      - zipkin-server
-#    environment:
-#      CONFIG_SERVER_URL: http://config-server:9999
-#      EUREKA_SERVICE_URL: http://eureka-service:8761/eureka/
-#      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-#    ports:
-#      - "8080:8080"
+  bookstore-client:
+    image: bookstore/bookstore-client:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: bookstore-client
+        PORT: 8080
+        MAIN_CLASS: com.meresti.bookstoreclient.BookstoreClientApplication
+    depends_on:
+      - consul
+      - zipkin-server
+    environment:
+      CONSUL_HOST: consul
+      CONSUL_PORT: 8500
+      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+      DEBUG_PORT: 5005
+    ports:
+      - "8080:8080"
+      - "5005:5005"

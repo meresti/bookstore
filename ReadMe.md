@@ -23,3 +23,4 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 - https://dzone.com/articles/the-future-of-spring-cloud-microservices-after-net
 - https://dzone.com/articles/microservices-with-spring-boot-spring-cloud-gatewa
 - http://progressivecoder.com/a-detailed-guide-to-spring-cloud-consul/
+- https://github.com/resilience4j/resilience4j-spring-boot2-demo
