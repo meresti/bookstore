@@ -3,11 +3,11 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 
 # build
 `gardlew clean build -x test`
+
 `docker-compose build`
 # deploy
-## docker-compose
 `docker-compose up`
-### Services
+## Services
 - Auth service
 - HashiCorp Consul: http://localhost:8500/
 - Zipkin server: http://localhost:9411/zipkin/
