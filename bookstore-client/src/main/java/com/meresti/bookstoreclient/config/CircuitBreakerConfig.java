@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.time.Duration;
+import java.util.Map;
 
 @Configuration(proxyBeanMethods = false)
 public class CircuitBreakerConfig {
@@ -53,7 +54,12 @@ public class CircuitBreakerConfig {
 
         @PostConstruct
         public void registerBeanDefinitions() {
-            circuitBreakerProperties.getConfigs().forEach((id, config) -> {
+            processConfig(circuitBreakerProperties.getConfigs());
+            processConfig(circuitBreakerProperties.getInstances());
+        }
+
+        private void processConfig(Map<String, CircuitBreakerConfigurationProperties.InstanceProperties> configs) {
+            configs.forEach((id, config) -> {
                 processConfig(id, config, beanFactory, circuitBreakerProperties);
             });
         }

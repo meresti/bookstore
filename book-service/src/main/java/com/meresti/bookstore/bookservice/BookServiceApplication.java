@@ -7,8 +7,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.function.RequestPredicates;
+import org.springframework.web.servlet.function.RouterFunction;
+import org.springframework.web.servlet.function.RouterFunctions;
+import org.springframework.web.servlet.function.ServerResponse;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
@@ -20,6 +26,12 @@ public class BookServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BookServiceApplication.class, args);
+    }
+
+    @Bean
+    RouterFunction<ServerResponse> redirectRoot() {
+        return RouterFunctions.route(RequestPredicates.GET("/"),
+                req -> ServerResponse.permanentRedirect(URI.create("/actuator")).build());
     }
 
     @Component
