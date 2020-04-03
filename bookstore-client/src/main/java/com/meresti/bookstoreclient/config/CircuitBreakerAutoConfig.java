@@ -31,7 +31,7 @@ import java.util.function.BiFunction;
 public class CircuitBreakerAutoConfig {
 
     @Configuration(proxyBeanMethods = false)
-    @ConditionalOnProperty(name = "bookstore.circuitbreaker.configuration.enabled", havingValue = "false", matchIfMissing = true)
+    @ConditionalOnProperty(name = "bookstore.circuit-breaker.configuration.enabled", havingValue = "false", matchIfMissing = true)
     public static class CodeBasedConfigurator {
         @Bean
         public Customizer<Resilience4JCircuitBreakerFactory> defaultCustomizer() {
@@ -53,14 +53,12 @@ public class CircuitBreakerAutoConfig {
 
     @RequiredArgsConstructor
     @Configuration(proxyBeanMethods = false)
-    @EnableConfigurationProperties({CircuitBreakerProperties.class, TimeLimiterProperties.class})
-    @ConditionalOnProperty(name = "bookstore.circuitbreaker.configuration.enabled", havingValue = "true")
+    @EnableConfigurationProperties({CircuitBreakerProperties.class})
+    @ConditionalOnProperty(name = "bookstore.circuit-breaker.configuration.enabled", havingValue = "true")
     public static class PropertyBasedConfigurator {
         private final DefaultListableBeanFactory beanFactory;
 
         private final CircuitBreakerProperties circuitBreakerProperties;
-
-        private final TimeLimiterProperties timeLimiterProperties;
 
         @PostConstruct
         public void registerBeanDefinitions() {
@@ -72,10 +70,10 @@ public class CircuitBreakerAutoConfig {
 
         private Map<String, Configs> createConfigMap() {
             final Map<String, Configs> configMap = new HashMap<>();
-            collectConfigs(configMap, circuitBreakerProperties.getConfigs(), this::createCircuitBreakerConfig, Configs::setCircuitBreakerConfig);
-            collectConfigs(configMap, circuitBreakerProperties.getInstances(), this::createCircuitBreakerConfig, Configs::setCircuitBreakerConfig);
-            collectConfigs(configMap, timeLimiterProperties.getConfigs(), this::createTimeLimiterConfig, Configs::setTimeLimiterConfig);
-            collectConfigs(configMap, timeLimiterProperties.getInstances(), this::createTimeLimiterConfig, Configs::setTimeLimiterConfig);
+            collectConfigs(configMap, circuitBreakerProperties.getCircuitBreaker().getConfigs(), this::createCircuitBreakerConfig, Configs::setCircuitBreakerConfig);
+            collectConfigs(configMap, circuitBreakerProperties.getCircuitBreaker().getInstances(), this::createCircuitBreakerConfig, Configs::setCircuitBreakerConfig);
+            collectConfigs(configMap, circuitBreakerProperties.getTimeLimiter().getConfigs(), this::createTimeLimiterConfig, Configs::setTimeLimiterConfig);
+            collectConfigs(configMap, circuitBreakerProperties.getTimeLimiter().getInstances(), this::createTimeLimiterConfig, Configs::setTimeLimiterConfig);
             return configMap;
         }
 
@@ -91,14 +89,14 @@ public class CircuitBreakerAutoConfig {
             );
         }
 
-        private TimeLimiterConfig createTimeLimiterConfig(final String id,
-                                                          final TimeLimiterConfigurationProperties.InstanceProperties config) {
-            return timeLimiterProperties.createTimeLimiterConfig(id, config, new CompositeCustomizer<>(null));
-        }
-
         private CircuitBreakerConfig createCircuitBreakerConfig(final String id,
                                                                 final CircuitBreakerConfigurationProperties.InstanceProperties config) {
-            return circuitBreakerProperties.createCircuitBreakerConfig(id, config, new CompositeCustomizer<>(null));
+            return circuitBreakerProperties.getCircuitBreaker().createCircuitBreakerConfig(id, config, new CompositeCustomizer<>(null));
+        }
+
+        private TimeLimiterConfig createTimeLimiterConfig(final String id,
+                                                          final TimeLimiterConfigurationProperties.InstanceProperties config) {
+            return circuitBreakerProperties.getTimeLimiter().createTimeLimiterConfig(id, config, new CompositeCustomizer<>(null));
         }
 
         private CircuitBreakerConfig getCircuitBreakerConfig(final Configs configs) {
