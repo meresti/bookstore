@@ -1280,34 +1280,6 @@
       {
         "allValue": null,
         "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(application)",
-        "hide": 0,
-        "includeAll": false,
-        "index": -1,
-        "label": "Application",
-        "multi": false,
-        "name": "application",
-        "options": [],
-        "query": "label_values(application)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
           "text": "",
           "value": [
             ""
