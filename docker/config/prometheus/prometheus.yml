@@ -1,0 +1,52 @@
+global:
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, AlertManager).
+  external_labels:
+    monitor: 'bookstore-monitor'
+
+# Load and evaluate rules in this file every 'evaluation_interval' seconds.
+rule_files:
+  - 'alert-rules.yml'
+
+# A scrape configuration containing the endpoints to scrape
+# The job name is added as a label `job=<job_name>` to any time-series scraped from this config.
+scrape_configs:
+  - job_name: 'prometheus'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'hello-service'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    metrics_path: /actuator/prometheus
+
+    static_configs:
+      - targets: ['hello-service:8010']
+
+  - job_name: 'book-service'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    metrics_path: /actuator/prometheus
+
+    static_configs:
+      - targets: ['book-service:8020']
+
+  - job_name: 'bookstore-client'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    metrics_path: /actuator/prometheus
+
+    static_configs:
+      - targets: ['bookstore-client:8080']

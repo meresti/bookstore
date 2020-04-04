@@ -1,5 +1,9 @@
 version: "3"
 
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
 services:
 
   consul:
@@ -24,7 +28,6 @@ services:
   # https://github.com/openzipkin/zipkin/tree/master/docker/examples
   zipkin-storage:
     image: openzipkin/zipkin-cassandra
-    container_name: cassandra
     ports:
       - 9042:9042
 
@@ -41,6 +44,27 @@ services:
       - CASSANDRA_CONTACT_POINTS=cassandra
     ports:
       - 9411:9411
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - ./config/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./config/grafana/grafana.env
+    ports:
+      - "3000:3000"
 
   hello-service:
     image: bookstore/hello-service:v0.1
@@ -88,7 +112,7 @@ services:
       dockerfile: docker/Dockerfile
       args:
         PROJECT: book-service
-        PORT: 8000
+        PORT: 8020
         MAIN_CLASS: com.meresti.bookstore.bookservice.BookServiceApplication
     depends_on:
       - consul
@@ -99,7 +123,7 @@ services:
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
       DEBUG_PORT: 4004
     ports:
-      - "8020:8000"
+      - "8020:8020"
       - "4004:4004"
 
   bookstore-client:

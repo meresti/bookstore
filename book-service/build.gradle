@@ -17,5 +17,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     runtimeOnly 'org.glassfish.jaxb:jaxb-runtime'
     runtimeOnly 'com.h2database:h2'
+    implementation("io.micrometer:micrometer-registry-prometheus")
 }
 

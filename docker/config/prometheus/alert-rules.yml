@@ -1,0 +1,30 @@
+groups:
+  - name: bookstore
+    rules:
+      # Alert for any instance that is unreachable for >2 minutes.
+      - alert: service_down
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
+
+      - alert: high_memory_load
+        expr: jvm_memory_used_bytes{area="heap"} / jvm_memory_max_bytes{area="heap"} > 0.8
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Instance {{ $labels.instance }} memory is filling up"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} is running out of memory"
+
+      - alert: high_cpu_load
+        expr: process_cpu_usage > 0.8
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Instance {{ $labels.instance }} CPU usage is high"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} is running out of CPU"
