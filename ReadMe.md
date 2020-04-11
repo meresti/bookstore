@@ -24,3 +24,6 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 - https://dzone.com/articles/microservices-with-spring-boot-spring-cloud-gatewa
 - http://progressivecoder.com/a-detailed-guide-to-spring-cloud-consul/
 - https://github.com/resilience4j/resilience4j-spring-boot2-demo
+- https://github.com/spring-cloud/spring-cloud-sleuth
+- https://cassiomolin.com/2019/06/30/log-aggregation-with-spring-boot-elastic-stack-and-docker/
+
