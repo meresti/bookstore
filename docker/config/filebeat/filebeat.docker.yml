@@ -18,6 +18,9 @@ filebeat.autodiscover:
                     fields: ["message"]
                     target: ""
                     overwrite_keys: true
+                - drop_fields:    # drop docker labels used only by filebeat
+                    fields: ["docker.container.labels.collect_logs_with_filebeat", "docker.container.labels.decode_log_event_to_json_object"]
+                    ignore_missing: false
 
 output.logstash:
   hosts: "logstash:5044"
