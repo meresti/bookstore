@@ -34,7 +34,7 @@ services:
       - 9042:9042
 
   zipkin-server:
-    image: openzipkin/zipkin
+    image: openzipkin/zipkin:2.20.0         # the latest version (2.21.0) shows a blank page when accessing the UI
     depends_on:
       - zipkin-storage
     environment:
@@ -43,7 +43,7 @@ services:
       - CASSANDRA_ENSURE_SCHEMA=false
       # When overriding this value, note the minimum supported version is 3.9
       # If you you cannot run 3.9+, but can run 2.2+, set STORAGE_TYPE=cassandra
-      - CASSANDRA_CONTACT_POINTS=cassandra
+      - CASSANDRA_CONTACT_POINTS=zipkin-storage
     ports:
       - 9411:9411
 
@@ -57,6 +57,16 @@ services:
       - '--storage.tsdb.path=/prometheus'
     ports:
       - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./config/grafana/grafana.env
+    ports:
+      - "3000:3000"
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
@@ -75,7 +85,6 @@ services:
       - elasticsearch
     volumes:
       - ./config/logstash/pipeline/:/usr/share/logstash/pipeline/
-#      - ./config/logstash/settings/:/usr/share/logstash/config/
     ports:
       - 25826:25826
       - 5044:5044
@@ -102,16 +111,6 @@ services:
     restart: on-failure
     depends_on:
       - logstash
-
-  grafana:
-    image: grafana/grafana
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./config/grafana/provisioning/:/etc/grafana/provisioning/
-    env_file:
-      - ./config/grafana/grafana.env
-    ports:
-      - "3000:3000"
 
   hello-service:
     image: bookstore/hello-service:v0.1
