@@ -1,5 +1,6 @@
 rootProject.name = 'bookstore'
 //include 'auth-service'
+include 'gateway'
 include 'book-service'
 include 'bookstore-client'
 include 'hello-service'

@@ -1,0 +1,39 @@
+repositories {
+    mavenCentral()
+}
+
+ext {
+    logstashLogbackEncoderVersion = '6.3'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+    implementation 'org.springframework.cloud:spring-cloud-starter-consul-config'
+    implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery') {
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-netflix-hystrix'
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+    }
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+//    implementation "io.github.resilience4j:resilience4j-feign:$resilience4jVersion"
+//    implementation "io.github.resilience4j:resilience4j-spring-boot2:$resilience4jVersion"
+//    implementation "io.github.resilience4j:resilience4j-spring-cloud2:$resilience4jVersion"
+//    implementation "io.github.resilience4j:resilience4j-circuitbreaker:$resilience4jVersion"
+//    implementation "io.github.resilience4j:resilience4j-timelimiter:$resilience4jVersion"
+//    implementation "io.github.resilience4j:resilience4j-micrometer:$resilience4jVersion"
+//    implementation('org.springframework.cloud:spring-cloud-starter-openfeign') {
+//        exclude group: 'io.github.openfeign', module: 'feign-hystrix'
+//        exclude group: 'org.springframework.cloud', module: 'spring-cloud-netflix-ribbon'
+//    }
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+    implementation "net.logstash.logback:logstash-logback-encoder:${logstashLogbackEncoderVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.retry:spring-retry'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation("io.micrometer:micrometer-registry-prometheus")
+
+    testImplementation 'io.projectreactor:reactor-test'
+}
+

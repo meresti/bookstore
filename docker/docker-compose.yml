@@ -112,6 +112,30 @@ services:
     depends_on:
       - logstash
 
+  gateway:
+    image: bookstore/gateway:v0.1
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        PROJECT: gateway
+        PORT: 8080
+        MAIN_CLASS: com.meresti.gateway.GatewayApplication
+    depends_on:
+      - consul
+      - zipkin-server
+    environment:
+      CONSUL_HOST: consul
+      CONSUL_PORT: 8500
+      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+      DEBUG_PORT: 5080
+    ports:
+      - "8080:8080"
+      - "5080:5080"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
   hello-service:
     image: bookstore/hello-service:v0.1
     build:
@@ -128,10 +152,10 @@ services:
       CONSUL_HOST: consul
       CONSUL_PORT: 8500
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-      DEBUG_PORT: 2002
+      DEBUG_PORT: 5010
     ports:
       - "8010:8010"
-      - "2002:2002"
+      - "5010:5010"
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -170,10 +194,10 @@ services:
       CONSUL_HOST: consul
       CONSUL_PORT: 8500
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-      DEBUG_PORT: 4004
+      DEBUG_PORT: 5020
     ports:
       - "8020:8020"
-      - "4004:4004"
+      - "5020:5020"
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -185,7 +209,7 @@ services:
       dockerfile: docker/Dockerfile
       args:
         PROJECT: bookstore-client
-        PORT: 8080
+        PORT: 8070
         MAIN_CLASS: com.meresti.bookstoreclient.BookstoreClientApplication
     depends_on:
       - consul
@@ -194,10 +218,10 @@ services:
       CONSUL_HOST: consul
       CONSUL_PORT: 8500
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-      DEBUG_PORT: 5005
+      DEBUG_PORT: 5070
     ports:
-      - "8080:8080"
-      - "5005:5005"
+      - "8070:8070"
+      - "5070:5070"
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"

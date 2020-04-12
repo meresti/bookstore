@@ -14,8 +14,9 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 - Prometheus: http://localhost:9090/graph
 - Grafana: http://localhost:3000/
 - Kibana: http://localhost:5601/
-- Bookstore service: http://localhost:8020/books
-- Bookstore client service: http://localhost:8080/books/titles
+- Gateway: http://localhost:8070/bookstore-client/books/titles
+- Book service: http://localhost:8020/books
+- Bookstore client service: http://localhost:8070/books/titles
 - Hello service: http://localhost:8010/encrypted-message
 
 # todo
