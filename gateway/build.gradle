@@ -30,6 +30,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation("io.micrometer:micrometer-registry-prometheus")
 
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-security'
+
     testImplementation 'io.projectreactor:reactor-test'
 }
 

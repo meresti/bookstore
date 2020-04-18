@@ -129,6 +129,8 @@ services:
       CONSUL_PORT: 8500
       ZIPKIN_SERVER_URL: http://zipkin-server:9411/
       DEBUG_PORT: 5080
+      GOOGLE_CLIENT_ID: <your-client-id>
+      GOOGLE_CLIENT_SECRET: <your-client-secret>
     ports:
       - "8080:8080"
       - "5080:5080"
