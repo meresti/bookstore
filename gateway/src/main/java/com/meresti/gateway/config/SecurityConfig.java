@@ -1,4 +1,4 @@
-package com.meresti.gateway;
+package com.meresti.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

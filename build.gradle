@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
 }
 
@@ -25,12 +25,12 @@ allprojects {
     compileJava.options.encoding = 'UTF-8'
 
     ext {
-        set('springCloudVersion', "Hoxton.SR3")
+        set('springCloudVersion', "2021.0.4")
     }
 
     dependencies {
-        compileOnly('org.projectlombok:lombok:1.18.12')
-        annotationProcessor('org.projectlombok:lombok:1.18.12')
+        compileOnly('org.projectlombok:lombok')
+        annotationProcessor('org.projectlombok:lombok')
 
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

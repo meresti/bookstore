@@ -31,7 +31,7 @@ services:
   zipkin-storage:
     image: openzipkin/zipkin-cassandra
     ports:
-      - 9042:9042
+      - "9042:9042"
 
   zipkin-server:
     image: openzipkin/zipkin:2.20.0         # the latest version (2.21.0) shows a blank page when accessing the UI
@@ -42,16 +42,16 @@ services:
       # When using the test docker image, or have schema pre-installed, you don't need to re-install it
       - CASSANDRA_ENSURE_SCHEMA=false
       # When overriding this value, note the minimum supported version is 3.9
-      # If you you cannot run 3.9+, but can run 2.2+, set STORAGE_TYPE=cassandra
+      # If you cannot run 3.9+, but can run 2.2+, set STORAGE_TYPE=cassandra
       - CASSANDRA_CONTACT_POINTS=zipkin-storage
     ports:
-      - 9411:9411
+      - "9411:9411"
 
   prometheus:
     image: prom/prometheus
     volumes:
       - prometheus_data:/prometheus
-      - ./config/prometheus:/etc/prometheus
+      - ./config/prometheus:/etc/prometheus:ro
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -69,7 +69,7 @@ services:
       - "3000:3000"
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.4.3
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data:rw
     environment:
@@ -77,31 +77,31 @@ services:
       - "xpack.security.enabled=false"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
-      - 9200:9200
+      - "9200:9200"
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.6.2
+    image: docker.elastic.co/logstash/logstash:8.4.3
     depends_on:
       - elasticsearch
     volumes:
       - ./config/logstash/pipeline/:/usr/share/logstash/pipeline/
     ports:
-      - 25826:25826
-      - 5044:5044
+      - "25826:25826"
+      - "5044:5044"
     restart: on-failure
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.6.2
+    image: docker.elastic.co/kibana/kibana:8.4.3
     depends_on:
       - elasticsearch
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
     ports:
-      - 5601:5601
+      - "5601:5601"
     restart: on-failure
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:7.6.2
+    image: docker.elastic.co/beats/filebeat:8.4.3
     volumes:
       - ./config/filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro # Configuration file
       - /var/lib/docker/containers:/var/lib/docker/containers:ro                  # Docker logs
@@ -120,7 +120,7 @@ services:
       args:
         PROJECT: gateway
         PORT: 8080
-        MAIN_CLASS: com.meresti.gateway.GatewayApplication
+        JAR_FILE: gateway-1.0-SNAPSHOT.jar
     depends_on:
       - consul
       - zipkin-server
@@ -146,7 +146,7 @@ services:
       args:
         PROJECT: hello-service
         PORT: 8010
-        MAIN_CLASS: com.meresti.bookstore.helloservice.HelloServiceApplication
+        JAR_FILE: hello-service-1.0-SNAPSHOT.jar
     depends_on:
       - consul
       - zipkin-server
@@ -170,7 +170,7 @@ services:
   #      args:
   #        PROJECT: auth-service
   #        PORT: 7878
-  #        MAIN_CLASS: com.meresti.bookstore.authservice.AuthServiceApplication
+  #        JAR_FILE: com.meresti.bookstore.authservice.AuthServiceApplication
   #    depends_on:
   #      - config-server
   #      - eureka-service
@@ -188,7 +188,7 @@ services:
       args:
         PROJECT: book-service
         PORT: 8020
-        MAIN_CLASS: com.meresti.bookstore.bookservice.BookServiceApplication
+        JAR_FILE: book-service-1.0-SNAPSHOT.jar
     depends_on:
       - consul
       - zipkin-server
@@ -212,7 +212,7 @@ services:
       args:
         PROJECT: bookstore-client
         PORT: 8070
-        MAIN_CLASS: com.meresti.bookstoreclient.BookstoreClientApplication
+        JAR_FILE: bookstore-client-1.0-SNAPSHOT.jar
     depends_on:
       - consul
       - zipkin-server

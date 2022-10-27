@@ -1,6 +1,9 @@
 spring:
   application:
-    name: bookstore-client
+    name: gateway
+
+  config:
+    import: "consul:"
 
   cloud:
     consul:
@@ -9,6 +12,7 @@ spring:
       discovery:
         enabled: true
         fail-fast: true
+        register: false
       config:
         enabled: true
         fail-fast: true

@@ -1,4 +1,4 @@
-package com.meresti.gateway;
+package com.meresti.gateway.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;

@@ -1,4 +1,4 @@
-package com.meresti.gateway;
+package com.meresti.gateway.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
