@@ -6,7 +6,7 @@
       "url" : "https://github.com/meresti/bookstore-config.git",
       "include_branch_name" : false,
       "ignore_file_extension" : false,
-      "branches" : ["master"],
+      "branches" : ["wip"],
       "hooks": [{
         "type" : "polling",
         "interval" : "1"

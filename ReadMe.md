@@ -14,10 +14,18 @@ https://callistaenterprise.se/blogg/teknik/2015/05/20/blog-series-building-micro
 - Prometheus: http://localhost:9090/graph
 - Grafana: http://localhost:3000/
 - Kibana: http://localhost:5601/
+- Keycloak: http://localhost:9080/admin
 - Gateway: http://localhost:8080/bookstore-client/books/titles
 - Book service: http://localhost:8020/books
 - Bookstore client service: http://localhost:8070/books/titles
 - Hello service: http://localhost:8010/encrypted-message
+
+```shell
+docker exec docker_keycloak_1 opt/keycloak/bin/kc.sh export --dir /tmp/keycloak --realm bookstore
+docker exec docker_keycloak_1 ls /tmp/keycloak
+docker exec docker_keycloak_1 cat /tmp/keycloak/bookstore-realm.json > bookstore-realm.json
+docker exec docker_keycloak_1 cat /tmp/keycloak/bookstore-users-0.json.1 > bookstore-users-0.json.1
+```
 
 # todo
 - fix security
