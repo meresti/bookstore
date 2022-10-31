@@ -1,4 +1,4 @@
-package com.meresti.bookstore.bookservice.config;
+package com.meresti.bookstoreclient.config;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;

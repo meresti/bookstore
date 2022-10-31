@@ -151,110 +151,110 @@ services:
     networks:
       - bookstore
 
-  gateway:
-    image: bookstore/gateway:v0.1
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      args:
-        PROJECT: gateway
-        PORT: 8080
-        JAR_FILE: gateway-1.0-SNAPSHOT.jar
-    depends_on:
-      - consul
-      - zipkin-server
-    environment:
-      CONSUL_HOST: consul
-      CONSUL_PORT: 8500
-      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-      DEBUG_PORT: 5080
-      KEYCLOACK_SERVER_URL: http://keycloak:9080
-    ports:
-      - "8080:8080"
-      - "5080:5080"
-    networks:
-      - bookstore
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
-
-  hello-service:
-    image: bookstore/hello-service:v0.1
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      args:
-        PROJECT: hello-service
-        PORT: 8010
-        JAR_FILE: hello-service-1.0-SNAPSHOT.jar
-    depends_on:
-      - consul
-      - zipkin-server
-    environment:
-      CONSUL_HOST: consul
-      CONSUL_PORT: 8500
-      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-      KEYCLOACK_SERVER_URL: http://localhost:9080
-      DEBUG_PORT: 5010
-    ports:
-      - "8010:8010"
-      - "5010:5010"
-    networks:
-      - bookstore
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
-
-  book-service:
-    image: bookstore/book-service:v0.1
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      args:
-        PROJECT: book-service
-        PORT: 8020
-        JAR_FILE: book-service-1.0-SNAPSHOT.jar
-    depends_on:
-      - consul
-      - zipkin-server
-    environment:
-      CONSUL_HOST: consul
-      CONSUL_PORT: 8500
-      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-      KEYCLOACK_SERVER_URL: http://localhost:9080
-      DEBUG_PORT: 5020
-    ports:
-      - "8020:8020"
-      - "5020:5020"
-    networks:
-      - bookstore
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
-
-  bookstore-client:
-    image: bookstore/bookstore-client:v0.1
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      args:
-        PROJECT: bookstore-client
-        PORT: 8070
-        JAR_FILE: bookstore-client-1.0-SNAPSHOT.jar
-    depends_on:
-      - consul
-      - zipkin-server
-    environment:
-      CONSUL_HOST: consul
-      CONSUL_PORT: 8500
-      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
-      KEYCLOACK_SERVER_URL: http://localhost:9080
-      DEBUG_PORT: 5070
-    ports:
-      - "8070:8070"
-      - "5070:5070"
-    networks:
-      - bookstore
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
+#  gateway:
+#    image: bookstore/gateway:v0.1
+#    build:
+#      context: ..
+#      dockerfile: docker/Dockerfile
+#      args:
+#        PROJECT: gateway
+#        PORT: 8080
+#        JAR_FILE: gateway-1.0-SNAPSHOT.jar
+#    depends_on:
+#      - consul
+#      - zipkin-server
+#    environment:
+#      CONSUL_HOST: consul
+#      CONSUL_PORT: 8500
+#      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+#      DEBUG_PORT: 5080
+#      KEYCLOACK_SERVER_URL: http://keycloak:9080
+#    ports:
+#      - "8080:8080"
+#      - "5080:5080"
+#    networks:
+#      - bookstore
+#    labels:
+#      collect_logs_with_filebeat: "true"
+#      decode_log_event_to_json_object: "true"
+#
+#  hello-service:
+#    image: bookstore/hello-service:v0.1
+#    build:
+#      context: ..
+#      dockerfile: docker/Dockerfile
+#      args:
+#        PROJECT: hello-service
+#        PORT: 8010
+#        JAR_FILE: hello-service-1.0-SNAPSHOT.jar
+#    depends_on:
+#      - consul
+#      - zipkin-server
+#    environment:
+#      CONSUL_HOST: consul
+#      CONSUL_PORT: 8500
+#      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+#      KEYCLOACK_SERVER_URL: http://localhost:9080
+#      DEBUG_PORT: 5010
+#    ports:
+#      - "8010:8010"
+#      - "5010:5010"
+#    networks:
+#      - bookstore
+#    labels:
+#      collect_logs_with_filebeat: "true"
+#      decode_log_event_to_json_object: "true"
+#
+#  book-service:
+#    image: bookstore/book-service:v0.1
+#    build:
+#      context: ..
+#      dockerfile: docker/Dockerfile
+#      args:
+#        PROJECT: book-service
+#        PORT: 8020
+#        JAR_FILE: book-service-1.0-SNAPSHOT.jar
+#    depends_on:
+#      - consul
+#      - zipkin-server
+#    environment:
+#      CONSUL_HOST: consul
+#      CONSUL_PORT: 8500
+#      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+#      KEYCLOACK_SERVER_URL: http://localhost:9080
+#      DEBUG_PORT: 5020
+#    ports:
+#      - "8020:8020"
+#      - "5020:5020"
+#    networks:
+#      - bookstore
+#    labels:
+#      collect_logs_with_filebeat: "true"
+#      decode_log_event_to_json_object: "true"
+#
+#  bookstore-client:
+#    image: bookstore/bookstore-client:v0.1
+#    build:
+#      context: ..
+#      dockerfile: docker/Dockerfile
+#      args:
+#        PROJECT: bookstore-client
+#        PORT: 8070
+#        JAR_FILE: bookstore-client-1.0-SNAPSHOT.jar
+#    depends_on:
+#      - consul
+#      - zipkin-server
+#    environment:
+#      CONSUL_HOST: consul
+#      CONSUL_PORT: 8500
+#      ZIPKIN_SERVER_URL: http://zipkin-server:9411/
+#      KEYCLOACK_SERVER_URL: http://localhost:9080
+#      DEBUG_PORT: 5070
+#    ports:
+#      - "8070:8070"
+#      - "5070:5070"
+#    networks:
+#      - bookstore
+#    labels:
+#      collect_logs_with_filebeat: "true"
+#      decode_log_event_to_json_object: "true"
