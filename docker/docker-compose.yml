@@ -14,6 +14,8 @@ services:
     image: quay.io/keycloak/keycloak
     ports:
       - "9080:9080"
+    networks:
+      - bookstore
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
